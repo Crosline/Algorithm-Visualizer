@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pathfinding Visualizer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <a href="#" class="home-button">Home</a>
+      <select class="project-dropdown">
+        <option value="pathfinding">Pathfinding Visualizer</option>
+        <option value="project2">Project 2</option>
+        <option value="project3">Project 3</option>
+      </select>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Settings Panel -->
+    <div class="settings-panel">
+      <select id="algorithm-select">
+        <option value="dijkstra">Dijkstra's Algorithm</option>
+        <option value="astar">A* Algorithm</option>
+        <option value="bfs">Breadth-First Search (BFS)</option>
+        <option value="dfs">Depth-First Search (DFS)</option>
+      </select>
+      <button id="labyrinth-button">Predefined Labyrinth</button>
+    </div>
+    <div class="settings-panel">
+      <label for="speed-slider">Speed:</label>
+      <input type="range" id="speed-slider" min="1" max="10" value="5">
+      <button id="start-button">Start</button>
+      <button id="clear-button">Clear</button>
+    </div>
+
+    <!-- Grid Canvas -->
+    <canvas id="grid-canvas"></canvas>
+  </div>
+
+  <script src="common.js"></script>
+  <script src="dijkstra.js"></script>
+  <script src="astar.js"></script>
+  <script src="script.js"></script>
+  <script src="mousemove.js"></script>
+</body>
+</html>

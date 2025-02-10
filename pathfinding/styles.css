@@ -1,0 +1,57 @@
+/* styles.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Navbar */
+  .navbar {
+    height: 64px;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    margin-bottom: 5px;
+  }
+  
+  .navbar-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .home-button {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  .project-dropdown {
+    padding: 5px;
+    font-size: 16px;
+  }
+  
+  /* Settings Panel */
+  .settings-panel {
+    top: 80px;
+    left: 20px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+  }
+  
+  .settings-panel select,
+  .settings-panel button {
+    padding: 5px;
+    font-size: 14px;
+  }
+  
+  /* Grid Canvas */
+  #grid-canvas {
+    margin: 20px auto;
+    background-color: #f0f0f0;
+  }
