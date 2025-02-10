@@ -2,6 +2,17 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
+    background: linear-gradient(45deg, #1a234e 30%, #711b92 90%);
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    color: white;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
   
   /* Navbar */
@@ -9,7 +20,6 @@ body {
     height: 64px;
     width: 100%;
     background-color: #333;
-    color: white;
     display: flex;
     align-items: center;
     padding: 0 20px;
@@ -33,16 +43,6 @@ body {
     font-size: 16px;
   }
   
-  /* Settings Panel */
-  .settings-panel {
-    top: 80px;
-    left: 20px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-    display: flex;
-    gap: 10px;
-    z-index: 10;
-  }
   
   .settings-panel select,
   .settings-panel button {
@@ -55,3 +55,39 @@ body {
     margin: 20px auto;
     background-color: #f0f0f0;
   }
+
+  label {
+    display: block;
+    margin-top: 15px;
+  }
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  background: #ddd;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  margin-bottom: 15px;
+}
+
+input[type="range"]:hover {
+  opacity: 1;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #b14bc2;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #711b92;
+  cursor: pointer;
+}

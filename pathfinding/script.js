@@ -20,8 +20,11 @@ function drawGrid() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for (let i = 0; i < gridSize; i++) {
     for (let j = 0; j < gridSize; j++) {
-      ctx.strokeStyle = '#ccc';
+      ctx.strokeStyle = '#1a234e';
       ctx.strokeRect(j * cellSize, i * cellSize, cellSize, cellSize);
+
+      ctx.fillStyle = '#ccc';
+      ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
 
       if (i === start.y && j === start.x) {
         ctx.fillStyle = 'blue';
