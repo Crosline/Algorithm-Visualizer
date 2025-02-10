@@ -3,8 +3,6 @@
 function heuristic(a, b) {
   return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
 }
-
-
 function getNeighbors(node) {
   const neighbors = [];
   const directions = [
@@ -25,8 +23,6 @@ function getNeighbors(node) {
 
   return neighbors;
 }
-
-
 function reconstructPath(node) {
   const path = [];
   while (node) {
@@ -39,9 +35,13 @@ function reconstructPath(node) {
     visualizeNode(p, 'path');
   }
 }
-
-
 async function visualizeNode(node, type, speed = 1) {
+  if (node.x === start.x && node.y === start.y) {
+    return;
+  } else if (node.x === end.x && node.y === end.y) {
+    return;
+  }
+
   const color = type === 'visited' ? 'rgba(25, 25, 25, 0.5)' : 'green';
   ctx.fillStyle = color;
   ctx.fillRect(node.x * cellSize, node.y * cellSize, cellSize, cellSize);
@@ -52,8 +52,6 @@ async function visualizeNode(node, type, speed = 1) {
 
   await sleep(1/speed);
 }
-
-
 class PriorityQueue {
   constructor() {
     this.elements = [];

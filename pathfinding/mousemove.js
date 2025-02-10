@@ -2,8 +2,6 @@
 
 let isDraggingStart = false;
 let isDraggingEnd = false;
-
-
 canvas.addEventListener('mousedown', (e) => {
   const rect = canvas.getBoundingClientRect();
   const x = Math.floor((e.clientX - rect.left) / cellSize);
@@ -16,8 +14,6 @@ canvas.addEventListener('mousedown', (e) => {
     isDraggingEnd = true;
   }
 });
-
-
 canvas.addEventListener('mousemove', (e) => {
   if (isDraggingStart || isDraggingEnd) {
     console.log('dragging');
@@ -40,14 +36,10 @@ canvas.addEventListener('mousemove', (e) => {
     }
   }
 });
-
-
 canvas.addEventListener('mouseup', () => {
   isDraggingStart = false;
   isDraggingEnd = false;
 });
-
-
 canvas.addEventListener('mouseleave', () => {
   isDraggingStart = false;
   isDraggingEnd = false;
@@ -55,8 +47,6 @@ canvas.addEventListener('mouseleave', () => {
 
 let touchStartX = null;
 let touchStartY = null;
-
-
 canvas.addEventListener('touchstart', (e) => {
   e.preventDefault(); 
   const touch = e.touches[0]; 
@@ -84,8 +74,6 @@ canvas.addEventListener('touchstart', (e) => {
   touchStartX = x;
   touchStartY = y;
 });
-
-
 canvas.addEventListener('touchmove', (e) => {
   e.preventDefault(); 
   if (isDraggingStart || isDraggingEnd) {
@@ -109,14 +97,10 @@ canvas.addEventListener('touchmove', (e) => {
     }
   }
 });
-
-
 canvas.addEventListener('touchend', () => {
   isDraggingStart = false;
   isDraggingEnd = false;
 });
-
-
 canvas.addEventListener('touchcancel', () => {
   isDraggingStart = false;
   isDraggingEnd = false;

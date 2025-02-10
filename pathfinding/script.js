@@ -11,15 +11,11 @@ canvas.height = gridSize * cellSize;
 
 let grid = createGrid(gridSize);
 let start = { x: 0, y: 0 };
-let end = { x: gridSize - 7, y: gridSize - 9 };
+let end = { x: gridSize - 2, y: gridSize - 2 };
 let obstacles = new Set();
-
-
 function createGrid(size) {
   return Array.from({ length: size }, () => Array(size).fill(0));
 }
-
-
 function drawGrid() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for (let i = 0; i < gridSize; i++) {
@@ -28,7 +24,7 @@ function drawGrid() {
       ctx.strokeRect(j * cellSize, i * cellSize, cellSize, cellSize);
 
       if (i === start.y && j === start.x) {
-        ctx.fillStyle = 'green';
+        ctx.fillStyle = 'blue';
         ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
       } else if (i === end.y && j === end.x) {
         ctx.fillStyle = 'red';
@@ -40,8 +36,6 @@ function drawGrid() {
     }
   }
 }
-
-
 
 canvas.addEventListener('click', (e) => {
   const rect = canvas.getBoundingClientRect();
@@ -58,9 +52,8 @@ canvas.addEventListener('click', (e) => {
     drawGrid();
   }
 });
-
-
 document.getElementById('start-button').addEventListener('click', () => {
+  drawGrid();
   const algorithm = document.getElementById('algorithm-select').value;
   const speed = document.getElementById('speed-slider').value;
   switch (algorithm) {
@@ -83,16 +76,10 @@ document.getElementById('clear-button').addEventListener('click', () => {
   obstacles.clear();
   drawGrid();
 });
-
-
 document.getElementById('labyrinth-button').addEventListener('click', () => {
   obstacles.clear();
-  
-  for (let i = 5; i < 15; i++) {
-    obstacles.add(`${i},10`);
-  }
+
+  obstacles = generateMazeRecursiveBacktracking(start, end);
   drawGrid();
 });
-
-
 drawGrid();
