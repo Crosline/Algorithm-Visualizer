@@ -25,8 +25,9 @@ async function astar(speed) {
 
       
       if (current.x === end.x && current.y === end.y) {
-      reconstructPath(current);
-      return;
+        reconstructPath(current);
+        isRunning = false;
+        return;
       }
 
       closedSet.add(currentKey);
@@ -58,9 +59,10 @@ async function astar(speed) {
       }
 
       
-      await visualizeNode(current, 'visited', speed);
+      await visualizePath(current, 'visited', speed);
   }
 
   
-  alert("No path found!");
-  }
+    isRunning = false;
+    alert("No path found!");
+}

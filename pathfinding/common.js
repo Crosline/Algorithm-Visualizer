@@ -1,4 +1,4 @@
-
+const sleep = ms => new Promise(res => setTimeout(res, ms * 50));
 
 function heuristic(a, b) {
   return Math.abs(a.x - b.x) + Math.abs(a.y - b.y);
@@ -23,7 +23,8 @@ function getNeighbors(node) {
 
   return neighbors;
 }
-function reconstructPath(node) {
+
+async function reconstructPath(node) {
   const path = [];
   while (node) {
     path.push(node);
@@ -32,26 +33,26 @@ function reconstructPath(node) {
 
   
   for (const p of path.reverse()) {
-    visualizeNode(p, 'path');
+    await visualizePath(p, 'path');
   }
 }
-async function visualizeNode(node, type, speed = 1) {
-  if (node.x === start.x && node.y === start.y) {
-    return;
-  } else if (node.x === end.x && node.y === end.y) {
+async function visualizePath(node, type, speed = 1) {
+  if (isStartNode(node) || isEndNode(node)) {
     return;
   }
 
   const color = type === 'visited' ? 'rgba(25, 25, 25, 0.5)' : 'green';
-  ctx.fillStyle = color;
-  ctx.fillRect(node.x * cellSize, node.y * cellSize, cellSize, cellSize);
-
-  
-  ctx.strokeStyle = '#ccc';
-  ctx.strokeRect(node.x * cellSize, node.y * cellSize, cellSize, cellSize);
-
+  renderCell(node.x, node.y, color);
   await sleep(1/speed);
 }
+
+function isStartNode(node) {
+  return node.x === start.x && node.y === start.y;
+}
+function isEndNode(node) {
+  return node.x === end.x && node.y === end.y;
+}
+
 class PriorityQueue {
   constructor() {
     this.elements = [];

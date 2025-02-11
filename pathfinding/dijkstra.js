@@ -24,6 +24,7 @@ async function dijkstra(speed) {
       
       if (current.x === end.x && current.y === end.y) {
         reconstructPath(current);
+        isRunning = false;
         return;
       }
   
@@ -55,9 +56,10 @@ async function dijkstra(speed) {
       }
   
       
-      await visualizeNode(current, 'visited', speed);
+      await visualizePath(current, 'visited', speed);
     }
   
     
+    isRunning = false;
     alert("No path found!");
   }

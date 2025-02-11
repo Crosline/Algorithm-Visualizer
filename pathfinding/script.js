@@ -1,43 +1,17 @@
-
-const canvas = document.getElementById('grid-canvas');
-const ctx = canvas.getContext('2d');
-
-const sleep = ms => new Promise(res => setTimeout(res, ms * 50));
-
 const gridSize = 20; 
 const cellSize = 25; 
 canvas.width = gridSize * cellSize;
 canvas.height = gridSize * cellSize;
 
+let isRunning = false;
+
 let grid = createGrid(gridSize);
 let start = { x: 0, y: 0 };
 let end = { x: gridSize - 2, y: gridSize - 2 };
 let obstacles = new Set();
+
 function createGrid(size) {
   return Array.from({ length: size }, () => Array(size).fill(0));
-}
-function drawGrid() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (let i = 0; i < gridSize; i++) {
-    for (let j = 0; j < gridSize; j++) {
-      ctx.strokeStyle = '#1a234e';
-      ctx.strokeRect(j * cellSize, i * cellSize, cellSize, cellSize);
-
-      ctx.fillStyle = '#ccc';
-      ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
-
-      if (i === start.y && j === start.x) {
-        ctx.fillStyle = 'blue';
-        ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
-      } else if (i === end.y && j === end.x) {
-        ctx.fillStyle = 'red';
-        ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
-      } else if (obstacles.has(`${j},${i}`)) {
-        ctx.fillStyle = 'black';
-        ctx.fillRect(j * cellSize, i * cellSize, cellSize, cellSize);
-      }
-    }
-  }
 }
 
 canvas.addEventListener('click', (e) => {
@@ -52,13 +26,19 @@ canvas.addEventListener('click', (e) => {
     } else {
       obstacles.add(key);
     }
-    drawGrid();
+    initializeGrid();
   }
 });
 document.getElementById('start-button').addEventListener('click', () => {
-  drawGrid();
+  if (isRunning){
+    return;
+  }
+  isRunning = true;
+
+  initializeGrid();
   const algorithm = document.getElementById('algorithm-select').value;
   const speed = document.getElementById('speed-slider').value;
+
   switch (algorithm) {
     case 'dijkstra':
       dijkstra(speed);
@@ -77,12 +57,15 @@ document.getElementById('start-button').addEventListener('click', () => {
 
 document.getElementById('clear-button').addEventListener('click', () => {
   obstacles.clear();
-  drawGrid();
+  initializeGrid();
 });
 document.getElementById('labyrinth-button').addEventListener('click', () => {
   obstacles.clear();
 
   obstacles = generateMazeRecursiveBacktracking(start, end);
-  drawGrid();
+  initializeGrid();
 });
-drawGrid();
+
+
+obstacles = generateMazeRecursiveBacktracking(start, end);
+initializeGrid();
